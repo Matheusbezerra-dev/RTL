@@ -8,7 +8,7 @@ describe('teste componente App', () => {
   it('deve renderizar o componente Home ao clicar no link', () => {
     const { history } = renderWithRouter(<App />);
 
-    const homeLink = screen.getByRole('link', { name: 'Home' });
+    const homeLink = screen.getByRole('link', { name: /Home/i });
     expect(homeLink).toBeInTheDocument();
     userEvent.click(homeLink);
 
@@ -19,7 +19,7 @@ describe('teste componente App', () => {
   it('deve renderizar o componente About ao clicar no link', () => {
     const { history } = renderWithRouter(<App />);
 
-    const aboutLink = screen.getByRole('link', { name: 'About' });
+    const aboutLink = screen.getByRole('link', { name: /About/i });
     expect(aboutLink).toBeInTheDocument();
     userEvent.click(aboutLink);
 
