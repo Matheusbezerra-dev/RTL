@@ -9,12 +9,16 @@ describe('Verifique o componente PokemonDetails', () => {
     renderWithRouter(<App />);
     const moreDetails = screen.getByRole('link', { name: /More details/i });
     expect(moreDetails).toBeInTheDocument();
+
     userEvent.click(moreDetails);
+
     const details = screen.getByRole('heading', { name: /Pikachu Details/i });
     expect(details).toBeInTheDocument();
+
     const headingH2 = screen.getByRole('heading', { name: /Summary/i, level: 2 });
     expect(headingH2).toBeInTheDocument();
-    const paragraph = screen.getByText(/This intelligent Pokémon roasts/i);
+
+    const paragraph = screen.getByText(/This intelligent Pokémon roasts hard berries/i);
     expect(paragraph).toBeInTheDocument();
   });
 
@@ -22,12 +26,16 @@ describe('Verifique o componente PokemonDetails', () => {
     renderWithRouter(<App />);
     const moreDetails = screen.getByRole('link', { name: /More details/i });
     expect(moreDetails).toBeInTheDocument();
+
     userEvent.click(moreDetails);
+
     const headingH2 = screen.getByRole('heading',
       { name: /Game Locations of Pikachu/i, level: 2 });
     expect(headingH2).toBeInTheDocument();
+
     const imagemLocation = screen.getAllByRole('img', { name: /Pikachu location/i });
     expect(imagemLocation).toHaveLength(2);
+
     const imagem1 = 'https://cdn2.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png';
     const imagem2 = 'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png';
     expect(imagemLocation[0].src).toBe(imagem1);
@@ -38,11 +46,19 @@ describe('Verifique o componente PokemonDetails', () => {
     const { history } = renderWithRouter(<App />);
     const logoUrl = 'http://localhost/star-icon.svg';
     history.push('/pokemons/25');
+
     const checkStar = screen.getByRole(/checkbox/i);
     expect(checkStar).toBeInTheDocument();
     userEvent.click(checkStar);
+
     const favoritePokemon = screen.getByRole('img',
       { name: /Pikachu is marked as favorite/i });
     expect(favoritePokemon.src).toBe(logoUrl);
+    // Mario Assumção vc salvo o dia obrigado cara.
+    const favorite = screen.getByText(/Pokémon favoritado?/i);
+    expect(favorite).toHaveTextContent(/Pokémon favoritado?/i);
+
+    userEvent.click(checkStar);
+    expect(favoritePokemon).not.toBeInTheDocument();
   });
 });
