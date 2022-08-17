@@ -23,12 +23,15 @@ describe('Verifique o componente PokemonDetails', () => {
     const moreDetails = screen.getByRole('link', { name: /More details/i });
     expect(moreDetails).toBeInTheDocument();
     userEvent.click(moreDetails);
-
     const headingH2 = screen.getByRole('heading',
       { name: /Game Locations of Pikachu/i, level: 2 });
     expect(headingH2).toBeInTheDocument();
     const imagemLocation = screen.getAllByRole('img', { name: /Pikachu location/i });
     expect(imagemLocation).toHaveLength(2);
+    const imagem1 = 'https://cdn2.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png';
+    const imagem2 = 'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png';
+    expect(imagemLocation[0].src).toBe(imagem1);
+    expect(imagemLocation[1].src).toBe(imagem2);
   });
 
   it('Verifica se o usuario pode favoritar o pokemon', () => {
